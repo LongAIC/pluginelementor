@@ -191,7 +191,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                     'max' => 100
                 ],
                 'default' => [
-                    'size' => 50,
+                    'size' => 100,
                 ],
                 'selectors' => [
                     ' .hotspots_link' => 'width: {{SIZE}}%;',
@@ -210,7 +210,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                     'max' => 100
                 ],
                 'default' => [
-                    'size' => 35,
+                    'size' => 100,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .hotspots_link' => 'height: {{SIZE}}%;',

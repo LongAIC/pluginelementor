@@ -131,8 +131,8 @@ final class Plugin {
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-test-addon' ),
-			'<strong>' . esc_html__( 'Elementor Test Addon', 'elementor-test-addon' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'elementor-test-addon' ) . '</strong>'
+			'<strong>' . esc_html__( 'Ftech Plugin Elementor', '' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', '' ) . '</strong>'
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -178,7 +178,7 @@ final class Plugin {
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'elementor-test-addon' ),
-			'<strong>' . esc_html__( 'Elementor Test Addon', 'elementor-test-addon' ) . '</strong>',
+			'<strong>' . esc_html__( 'Ftech Plugin Elementor', '' ) . '</strong>',
 			'<strong>' . esc_html__( 'PHP', 'elementor-test-addon' ) . '</strong>',
 			 self::MINIMUM_PHP_VERSION
 		);
@@ -223,7 +223,7 @@ final class Plugin {
 	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
 	 */
 	public function register_widgets( $widgets_manager ) {
-		require_once(__DIR__ . '/modules/popup-image/widgets/popup-image.php');
+//		require_once(__DIR__ . '/modules/popup-image/widgets/popup-image.php');
         require_once(__DIR__ . '/widgets/widget-2.php');
         require_once (__DIR__. '/widgets/slides.php');
 
@@ -252,11 +252,11 @@ final class Plugin {
 	}
 
  	public function register_widget_styles() {
-		wp_register_style( 'widgets-2-style', plugins_url( '/assets/css/widgets-2-style.css', __FILE__ ) );
+		wp_register_style( 'widgets-2-style', plugins_url( '/assets/css/widget-2-style.css', __FILE__ ) );
 	}
 
 	function register_elementor_widget_styles() {
-		wp_register_style( 'widgets-2-style', plugin_dir_url( __FILE__ ) . '/assets/css/widgets-2-style.css' );
+		wp_register_style( 'widgets-2-style', plugin_dir_url( __FILE__ ) . '/assets/css/widget-2-style.css' );
 		wp_register_style( 'mag-popup', plugin_dir_url( __FILE__ ) . '/assets/Popup/lib/magnific-popup.css' );
 	}
 
@@ -267,7 +267,7 @@ final class Plugin {
 
 	function register_widget_scripts() {
 		wp_register_script( 'jquery-popup', plugins_url( '/assets/Popup/lib/jquery.js', __FILE__ ) );
-		wp_register_script( 'widgets-2-script', plugins_url( '/assets/js/widgets-2-script.js', __FILE__ ) );
+		wp_register_script( 'widgets-2-script', plugins_url( '/assets/js/widget-2-script.js', __FILE__ ) );
 		wp_register_script( 'popup-min', plugins_url( '/assets/Popup/lib/jquery.magnific-popup.min.js', __FILE__ ) );
 		
 	}
