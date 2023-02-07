@@ -1,5 +1,5 @@
 <?php
-namespace Elementor_Test_Addon;
+namespace FtechPluginElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
