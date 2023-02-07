@@ -109,7 +109,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                 ],
                 'size_units' => [ '%', 'px' ],
                 'default' => [
-                    'size' => 50,
+                    'size' => 100,
                     'unit' => '%'
                 ],
                 'selectors' => [
@@ -137,7 +137,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                 ],
                 'size_units' => [ '%', 'px' ],
                 'default' => [
-                    'size' => 50,
+                    'size' => 100,
                     'unit' => '%'
                 ],
                 'selectors' => [
@@ -191,7 +191,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                     'max' => 100
                 ],
                 'default' => [
-                    'size' => 100,
+                    'size' => 50,
                 ],
                 'selectors' => [
                     ' .hotspots_link' => 'width: {{SIZE}}%;',
@@ -210,7 +210,7 @@ class Widget_2 extends \Elementor\Widget_Base {
                     'max' => 100
                 ],
                 'default' => [
-                    'size' => 100,
+                    'size' => 35,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .hotspots_link' => 'height: {{SIZE}}%;',
