@@ -201,15 +201,11 @@ final class Plugin {
 
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		add_action( 'elementor/controls/register', [ $this, 'register_controls' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'register_widget_styles' ] );
-		// add_action( 'elementor/widgets/widgets_registered', function() {
-		// 	if ( class_exists( 'Elementor\Widget_Base' ) ) {
-		// 		add_action( 'wp_enqueue_scripts', [$this, 'my_library_enqueue'] );
-		// 	}
-		// });
+//		add_action( 'wp_enqueue_scripts', [ $this, 'register_widget_styles' ] );
 		add_action( 'elementor/frontend/after_enqueue_styles', [$this, 'register_elementor_widget_styles'] );
 		add_action( 'elementor/frontend/after_register_styles', [$this, 'enqueue_elementor_widget_styles'] );
 		add_action( 'wp_enqueue_scripts', [$this, 'register_widget_scripts'] );
+        add_action( 'elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories'] );
 
 	}
 
@@ -229,7 +225,7 @@ final class Plugin {
 
 //		$widgets_manager->register( new \Popup_Image_123() );
         $widgets_manager->register( new \Widget_2() );
-        $widgets_manager->register( new \Slides() );
+        $widgets_manager->register( new \SlidesExtension() );
 	}
 
 	/**
@@ -251,18 +247,16 @@ final class Plugin {
 
 	}
 
- 	public function register_widget_styles() {
-		wp_register_style( 'widgets-2-style', plugins_url( '/assets/css/widget-2-style.css', __FILE__ ) );
-	}
-
 	function register_elementor_widget_styles() {
 		wp_register_style( 'widgets-2-style', plugin_dir_url( __FILE__ ) . '/assets/css/widget-2-style.css' );
 		wp_register_style( 'mag-popup', plugin_dir_url( __FILE__ ) . '/assets/Popup/lib/magnific-popup.css' );
+        wp_register_style('widget-carousel-rtl', plugin_dir_url(__FILE__) . '/assets/css/widget-carousel-rtl.min.css');
 	}
 
 	function enqueue_elementor_widget_styles() {
 		wp_enqueue_style( 'widgets-2-style' );
 		wp_enqueue_style( 'mag-popup' );
+        wp_enqueue_style('widget-carousel-rtl');
 	}
 
 	function register_widget_scripts() {
@@ -271,8 +265,18 @@ final class Plugin {
 		wp_register_script( 'popup-min', plugins_url( '/assets/Popup/lib/jquery.magnific-popup.min.js', __FILE__ ) );
 		
 	}
-	
-	
+
+    function add_elementor_widget_categories( $elements_manager ) {
+
+        $elements_manager->add_category(
+            'ftech_extension',
+            [
+                'title' => esc_html__( 'Ftech Extension', 'textdomain' ),
+                'icon' => 'fa fa-plug',
+            ]
+        );
+    }
+
 
 }
 

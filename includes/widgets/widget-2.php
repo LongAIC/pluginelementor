@@ -20,7 +20,7 @@ class Widget_2 extends \Elementor\Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'general' ];
+		return [ 'ftech_extension' ];
 	}
 
 	public function get_keywords() {
@@ -278,8 +278,6 @@ class Widget_2 extends \Elementor\Widget_Base {
         $this->add_render_attribute( 'button', 'class', 'Learn More' );
 
 // Output the button HTML with the added render attributes
-
-
 
         ?>
 		 <article class="hotspots_layer">
