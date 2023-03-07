@@ -1,6 +1,8 @@
 <?php
 
 use Elementor\Group_Control_Css_Filter;
+use Elementor\Repeater;
+use Elementor\Controls_Manager;
 
 class Widget_2 extends \Elementor\Widget_Base {
     public function get_name() {
@@ -173,15 +175,19 @@ class Widget_2 extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
+
+
         $this->start_controls_section(
             'section_style_popup_hotspot',
             [
                 'label'=>esc_html__('Hotspot',''),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
 
-        $this->add_responsive_control(
+        $repeater = new Repeater();
+
+        $repeater->add_responsive_control(
             'width_hotspot',
             [
                 'type' => \Elementor\Controls_Manager::SLIDER,
@@ -193,14 +199,10 @@ class Widget_2 extends \Elementor\Widget_Base {
                 'default' => [
                     'size' => 50,
                 ],
-                'selectors' => [
-                    ' .hotspots_link' => 'width: {{SIZE}}%;',
-                ],
-                'separator' => 'before',
             ]
         );
 
-        $this->add_responsive_control(
+        $repeater->add_responsive_control(
             'height_hotspot',
             [
                 'type' => \Elementor\Controls_Manager::SLIDER,
@@ -212,15 +214,11 @@ class Widget_2 extends \Elementor\Widget_Base {
                 'default' => [
                     'size' => 35,
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .hotspots_link' => 'height: {{SIZE}}%;',
-                ],
-                'separator' => 'before',
             ]
         );
 
-        $this->add_responsive_control(
-            'top',
+        $repeater->add_responsive_control(
+            'top_hotspot',
             [
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'label' => esc_html__( 'Top', 'textdomain' ),
@@ -231,15 +229,11 @@ class Widget_2 extends \Elementor\Widget_Base {
                 'default' => [
                     'size' => 29,
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .hotspots_link' => 'top: {{SIZE}}%;',
-                ],
-                'separator' => 'before',
             ]
         );
 
-        $this->add_responsive_control(
-            'left',
+        $repeater->add_responsive_control(
+            'left_hotspot',
             [
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'label' => esc_html__( 'Left', 'textdomain' ),
@@ -250,32 +244,40 @@ class Widget_2 extends \Elementor\Widget_Base {
                 'default' => [
                     'size' => 19,
                 ],
-                'selectors' => [
-                    '{{WRAPPER}} .hotspots_link' => 'left: {{SIZE}}%;',
-                ],
-                'separator' => 'before',
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Css_Filter::get_type(),
+        $this->add_control(
+            'hotspot_items',
             [
-                'name' => 'image_css_filters',
-                'selector' => '{{WRAPPER}} .img_hotspot',
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
             ]
         );
+
 
         $this->end_controls_section();
-
-
 
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        // Add a render attribute to the button element
-        $this->add_render_attribute( 'button', 'class', 'my-custom-button' );
-        $this->add_render_attribute( 'button', 'class', 'Learn More' );
+        $hospots = [];
+        foreach ( $settings['hotspot_items'] as $hotspot ) {
+            $hotspot_html = '';
+
+            $hotspot_html .= '<a class="hotspots_link" style="top:'. $hotspot['top_hotspot']['size'] .'%; left:'. $hotspot['left_hotspot']['size'] .'%;  width:'. $hotspot['width_hotspot']['size'].'%; height: '. $hotspot['height_hotspot']['size'].'%;">';
+
+            $hotspot_html .= '<div class="hotspot_title_container" >';
+
+            $hotspot_html .= '<span class="hotspot_title" >More Info</span>';
+
+            $hotspot_html .= '</div></a>';
+
+            $hospots[] = $hotspot_html;
+
+        }
+
 
 // Output the button HTML with the added render attributes
 
@@ -284,11 +286,7 @@ class Widget_2 extends \Elementor\Widget_Base {
 			<div class="img_hotspot_container ">
 				<img class="img_hotspot " src="<?php echo $settings['image']['url'] ?>"  alt="">
 			</div>
-			<a class="hotspots_link" href="<?php echo $settings['image']['url'] ?>" >
-			<div class="hotspot_title_container">
-				<span class="hotspot_title" >More Info</span>
-			</div>
-			</a>
+            <?php echo implode( '', $hospots ); ?>
 		 </article>
          <?php 
     

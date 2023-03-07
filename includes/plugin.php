@@ -203,9 +203,11 @@ final class Plugin {
 		add_action( 'elementor/controls/register', [ $this, 'register_controls' ] );
 //		add_action( 'wp_enqueue_scripts', [ $this, 'register_widget_styles' ] );
 		add_action( 'elementor/frontend/after_enqueue_styles', [$this, 'register_elementor_widget_styles'] );
-		add_action( 'elementor/frontend/after_register_styles', [$this, 'enqueue_elementor_widget_styles'] );
+//		add_action( 'elementor/frontend/after_register_styles', [$this, 'enqueue_elementor_widget_styles'] );
 		add_action( 'wp_enqueue_scripts', [$this, 'register_widget_scripts'] );
         add_action( 'elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories'] );
+//        add_action( 'elementor/editor/after_enqueue_styles', [$this, 'my_custom_preview_styles'] );
+
 
 	}
 
@@ -239,31 +241,30 @@ final class Plugin {
 	 */
 	public function register_controls( $controls_manager ) {
 
-		require_once( __DIR__ . '/controls/control-1.php' );
-		// require_once( __DIR__ . '/includes/controls/control-2.php' );
-
-		$controls_manager->register( new \Control_1() );
-		// $controls_manager->register( new Control_2() );
 
 	}
 
 	function register_elementor_widget_styles() {
-		wp_register_style( 'widgets-2-style', plugin_dir_url( __FILE__ ) . '/assets/css/widget-2-style.css' );
-		wp_register_style( 'mag-popup', plugin_dir_url( __FILE__ ) . '/assets/Popup/lib/magnific-popup.css' );
-        wp_register_style('widget-carousel-rtl', plugin_dir_url(__FILE__) . '/assets/css/widget-carousel-rtl.min.css');
+		wp_register_style( 'widgets-2-style', plugin_dir_url( __FILE__ ) . './assets/css/widget-2-style.css' );
+		wp_register_style( 'mag-popup', plugin_dir_url( __FILE__ ) . './assets/Popup/lib/magnific-popup.css' );
+        wp_register_style('owl-carousel', plugin_dir_url(__FILE__) . './assets/Slides/owl.carousel.min.css');
+        wp_register_style('owl-carousel-theme', plugin_dir_url(__FILE__) . './assets/Slides/owl.theme.default.css');
+        wp_register_style('slides-style', plugin_dir_url(__FILE__) . './assets/Slides/style.css');
 	}
 
 	function enqueue_elementor_widget_styles() {
-		wp_enqueue_style( 'widgets-2-style' );
-		wp_enqueue_style( 'mag-popup' );
-        wp_enqueue_style('widget-carousel-rtl');
+//		wp_enqueue_style( 'widgets-2-style' );
+//		wp_enqueue_style( 'mag-popup' );
+        wp_enqueue_style('slides-style');
 	}
 
 	function register_widget_scripts() {
 		wp_register_script( 'jquery-popup', plugins_url( '/assets/Popup/lib/jquery.js', __FILE__ ) );
 		wp_register_script( 'widgets-2-script', plugins_url( '/assets/js/widget-2-script.js', __FILE__ ) );
 		wp_register_script( 'popup-min', plugins_url( '/assets/Popup/lib/jquery.magnific-popup.min.js', __FILE__ ) );
-		
+        wp_register_script( 'slides-script', plugins_url('/assets/Slides/script.js',__FILE__ ) );
+        wp_register_script( 'owl-carousel-js', plugins_url('/assets/Slides/owl.carousel.js',__FILE__ ) );
+
 	}
 
     function add_elementor_widget_categories( $elements_manager ) {
@@ -276,6 +277,7 @@ final class Plugin {
             ]
         );
     }
+
 
 
 }

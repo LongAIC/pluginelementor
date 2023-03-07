@@ -1,0 +1,11 @@
+
+
+
+.swiper-slide-content {
+  align-items: center;
+  background-color: tomato;
+  color: pink;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+}

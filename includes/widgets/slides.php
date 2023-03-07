@@ -33,7 +33,11 @@ class SlidesExtension extends \Elementor\Widget_Base
     }
 
     public function get_style_depends() {
-        return [ 'widget-carousel-rtl' ];
+        return ['owl-carousel','owl-carousel-theme', 'slides-style' ];
+    }
+
+    public function get_script_depends() {
+        return ['jquery-popup','owl-carousel-js','slides-script' ];
     }
 
     protected function register_controls()
@@ -183,9 +187,6 @@ class SlidesExtension extends \Elementor\Widget_Base
 
         $slides = [];
         $slide_count = 0;
-        $show_dots = true;
-        $show_arrows = true;
-
         foreach ($settings['slides'] as $slide) {
             $slide_html = '';
             $btn_attributes = '';
@@ -214,49 +215,24 @@ class SlidesExtension extends \Elementor\Widget_Base
         }
         $slides_count = count($settings['slides']);
         ?>
-            <div class="elementor-swiper">
-                <div class="elementor-slides-wrapper elementor-main-swiper swiper-container">
-                    <div class="swiper-wrapper elementor-slides">
-                        <?php // PHPCS - Slides for each is safe.?>
-                        <?php echo implode('', $slides); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        ?>
-                    </div>
-                    <?php if (1 < $slides_count) : ?>
-                        <?php if ($show_dots) : ?>
-                            <div class="swiper-pagination"></div>
-                        <?php endif ?>
-                    <?php if ($show_arrows) : ?>
-                        <div class="elementor-swiper-button elementor-swiper-button-prev">
-                            <?php $this->render_swiper_button('previous'); ?>
-                            <span class="elementor-screen-only">
-                                <?php echo esc_html__('Previous', ''); ?>
-                            </span>
-                        </div>
-                        <div class="elementor-swiper-button elementor-swiper-button-next">
-                            <?php $this->render_swiper_button('next'); ?>
-                            <span class="elementor-screen-only">
-                                <?php esc_html__('Next', ''); ?>
-                            </span>
-                        </div>
-                    <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-        </div>
+        <article>
+            <div class="item"><h4>1</h4></div>
+            <div class="item"><h4>2</h4></div>
+            <div class="item"><h4>3</h4></div>
+            <div class="item"><h4>4</h4></div>
+            <div class="item"><h4>5</h4></div>
+            <div class="item"><h4>6</h4></div>
+            <div class="item"><h4>7</h4></div>
+            <div class="item"><h4>8</h4></div>
+            <div class="item"><h4>9</h4></div>
+            <div class="item"><h4>10</h4></div>
+            <div class="item"><h4>11</h4></div>
+            <div class="item"><h4>12</h4></div>
+        </article>
+        <p>Trung</p>
         <?php
     }
-    private function render_swiper_button ($type) {
-        $direction = 'next' === $type ? 'right' : 'left';
-        if (is_rtl()) {
-            $direction = 'right' === $direction ? 'left' : 'right';
-        }
 
-        $icon_value = 'eicon-chevron-' . $direction;
-
-        Icons_Manager::render_icon([
-                'library' => 'eicons',
-                'value' => $icon_value,
-        ], ['aria-hiddon' => 'true']);
-    }
 }
 
 
